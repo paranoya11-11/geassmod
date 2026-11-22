@@ -1,7 +1,6 @@
-﻿
 # Name: AutoReply
 # Author: @GeassMod
-# Version: 1.1.0
+# Version: 1.1.1
 # Description: Customizable automatic replies for Heroku Userbot.
 
 __version__ = (1, 1, 0)
@@ -288,8 +287,15 @@ class AutoReplyMod(loader.Module):
     async def autoreply_watcher(self, message: Message):
         """Handle incoming messages and automatic replies."""
 
-        if message.out or not message.sender_id:
+        if getattr(message, "out", False):
             return
+
+        sender = await message.get_sender()
+
+        if not sender or not getattr(sender, "id", None):
+            return
+
+        sender_id = sender.id
 
         if not getattr(message, "message", None):
             return
