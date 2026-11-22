@@ -1,1 +1,1 @@
-AutoReply
+AutoReply https://raw.githubusercontent.com/paranoya11-11/geassmod/refs/heads/main/AutoReply.py
